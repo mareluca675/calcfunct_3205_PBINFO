@@ -1,0 +1,53 @@
+#include <fstream>
+
+std::ifstream fin("calcfunct.in");
+std::ofstream fout("calcfunct.out");
+
+int pozMax(int v[], int n){
+    int maxim = v[0], indice = 0;
+    for(int i = 1; i < n; ++ i){
+        if(maxim < v[i]){
+            maxim = v[i];
+            indice = i;
+        }
+    }
+
+    return indice;
+}
+
+int pozMin(int v[], int n){
+    int minim = v[0], indice = 0;
+    for(int i = 1; i < n; ++ i){
+        if(minim > v[i]){
+            minim = v[i];
+            indice = i;
+        }
+    }
+
+    return indice;
+}
+
+void my_swap(int& a, int& b){
+    int aux = a;
+    a = b;
+    b = aux;
+}
+
+void print_vector(int v[], int pozInit, int pozFin){
+    if(pozInit > pozFin)
+        my_swap(pozInit, pozFin);
+    for(int i = pozFin; i >= pozInit; --i)
+        fout << v[i] << ' ';
+}
+
+int main()
+{
+    int n, v[101];
+    fin >> n;
+
+    for(int i = 0; i < n; ++ i)
+        fin >> v[i];
+    print_vector(v, pozMin(v, n), pozMax(v, n));
+
+    return 0;
+}
